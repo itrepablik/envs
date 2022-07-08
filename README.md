@@ -1,4 +1,4 @@
-![mem package](https://user-images.githubusercontent.com/58651329/155666747-72a17ca0-57a9-4021-8cc9-1d37019634fc.png)
+![envs package](https://user-images.githubusercontent.com/58651329/177908485-7a16a57d-96ad-431d-8d47-519a7c8949dc.png)
 
 # Installation
 ```go
