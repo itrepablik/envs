@@ -26,7 +26,7 @@ func main() {
 		logger.Fatal(err)
 	}
 	fmt.Println("MY_ENV_VAR_1: ", os.Getenv("MY_ENV_VAR_1"))
-    fmt.Println("MY_ENV_VAR_5: ", os.Getenv("MY_ENV_VAR_5"))
+    	fmt.Println("MY_ENV_VAR_5: ", os.Getenv("MY_ENV_VAR_5"))
 }
 ```
 
