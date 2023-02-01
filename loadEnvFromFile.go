@@ -11,6 +11,7 @@ import (
 const (
 	COMMENT_SYMBOL   = "#"
 	SEPARATOR_SYMBOL = "="
+	ERROR_LINE       = "file is not in correct format"
 )
 
 // LoadEnvFromFile loads environment variables from a file
@@ -49,16 +50,23 @@ func loadEnvs(filename string) error {
 			continue
 		}
 
-		// Validate if the line don't have = symbol in it
-		if !strings.Contains(scanner.Text(), SEPARATOR_SYMBOL) {
-			return fmt.Errorf(filename + " file is not in correct format")
-		}
-
 		// Split the line on the = character
 		line := strings.Split(scanner.Text(), SEPARATOR_SYMBOL)
+		countIndex := len(line)
+
+		// Get the environment variable name and value
+		envVarName := strings.TrimSpace(line[0])
+		envVarValue := strings.TrimSpace(line[1])
+
+		// Check if countIndex >= 2, concatenate the value if countIndex > 2
+		if countIndex >= 2 {
+			for i := 2; i < countIndex; i++ {
+				envVarValue = envVarValue + SEPARATOR_SYMBOL + strings.TrimSpace(line[i])
+			}
+		}
 
 		// Validate line[0] to block empty environment variable name
-		if strings.TrimSpace(line[0]) == "" {
+		if envVarName == "" {
 			return fmt.Errorf(filename + " file is not in correct format, variable name is empty")
 		}
 
@@ -71,7 +79,7 @@ func loadEnvs(filename string) error {
 		line[1] = strings.Split(line[1], COMMENT_SYMBOL)[0]
 
 		// Set the environment variable
-		os.Setenv(strings.TrimSpace(line[0]), strings.TrimSpace(line[1]))
+		os.Setenv(envVarName, envVarValue)
 	}
 	return nil
 }
