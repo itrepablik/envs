@@ -75,8 +75,8 @@ func loadEnvs(filename string) error {
 			return fmt.Errorf(filename + " file is not in correct format, variable name is invalid")
 		}
 
-		// Remove comments from the line[1] starts with #
-		line[1] = strings.Split(line[1], COMMENT_SYMBOL)[0]
+		// Remove comments from the envVarValue starts with #
+		envVarValue = strings.Split(envVarValue, COMMENT_SYMBOL)[0]
 
 		// Set the environment variable
 		os.Setenv(envVarName, envVarValue)
